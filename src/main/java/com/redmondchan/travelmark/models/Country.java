@@ -1,12 +1,18 @@
 package com.redmondchan.travelmark.models;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+
+
+
 
 
 @Entity
@@ -18,8 +24,8 @@ public class Country {
 	private int id;
 	private String name;
 	
-	@OneToOne(mappedBy = "country")
-	private City city;
+	@OneToMany(mappedBy = "country")
+	private List<City> cities;
 	
 	public String getName() {
 		return name;

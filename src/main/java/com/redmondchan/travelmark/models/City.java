@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -20,8 +21,8 @@ public class City {
 	private int id;
 	private String name;
 	
-	@OneToOne
-	@JoinColumn(name = "country_id", referencedColumnName = "id")
+	@ManyToOne
+	@JoinColumn(name = "fk_country_id", referencedColumnName = "id")
 	private Country country;
 	
 	public int getId() {

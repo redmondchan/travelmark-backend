@@ -23,7 +23,7 @@ public class CountryController {
 	 private CountryRepository countryRepository;
 	 
 	 @GetMapping("/country/{id}")
-	 public ResponseEntity<Object> getUser(@PathVariable("id") int id) {
+	 public ResponseEntity<Object> getCountry(@PathVariable("id") int id) {
 		 
 		 //return" inside getUser method";
 		 return new ResponseEntity<>(countryRepository.findById(id), HttpStatus.OK);

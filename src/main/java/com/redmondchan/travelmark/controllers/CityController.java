@@ -21,7 +21,7 @@ public class CityController {
 	private CityRepository cityRepository;
 	
 	 @GetMapping("/city/{id}")
-	 public ResponseEntity<Object> getUser(@PathVariable("id") int id) {
+	 public ResponseEntity<Object> getCity(@PathVariable("id") int id) {
 		 
 		 //return" inside getUser method";
 		 return new ResponseEntity<>(cityRepository.findById(id), HttpStatus.OK);

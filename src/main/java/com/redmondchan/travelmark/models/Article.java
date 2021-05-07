@@ -41,6 +41,12 @@ public class Article {
 	public void setLink(String link) {
 		this.link = link;
 	}
+	public City getCity() {
+		return city;
+	}
+	public void setCity(City city) {
+		this.city = city;
+	}
 	
 	
 }

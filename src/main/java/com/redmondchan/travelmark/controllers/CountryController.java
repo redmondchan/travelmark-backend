@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.redmondchan.travelmark.models.City;
 import com.redmondchan.travelmark.models.Country;
+import com.redmondchan.travelmark.repository.CityRepository;
 import com.redmondchan.travelmark.repository.CountryRepository;
 
 @RestController
@@ -29,6 +31,7 @@ import com.redmondchan.travelmark.repository.CountryRepository;
 public class CountryController {
 	 @Autowired
 	 private CountryRepository countryRepository;
+	 @Autowired CityRepository cityRepository;
 	 
 	 @GetMapping("/country/{id}")
 	 public ResponseEntity<Object> getCountry(@PathVariable("id") int id) {
@@ -57,57 +60,67 @@ public class CountryController {
 	 }
 	 
 	 //endpoint to utilize an api to populate the database with countries and cities
-	 @GetMapping("/createDb")
-	 public ResponseEntity<Object> createDb() {
-			try {
-				
-				URL url = new URL("https://countriesnow.space/api/v0.1/countries");
-				
-				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-				conn.setRequestMethod("GET");
-				conn.connect();
-				
-				//Get response code
-				int responseCode = conn.getResponseCode();
-				
-				if(responseCode != 200) {
-					throw new RuntimeException("HttpResponseCode:" + responseCode);
-				} else {
-					String inLine = "";
-					Scanner scanner = new Scanner(url.openStream());
-					
-					//write all json data into a string 
-					while(scanner.hasNext()) {
-						inLine += scanner.nextLine();
-					}
-					
-					scanner.close();
-					
-					JSONParser parse = new JSONParser();
-					JSONObject dataObj = (JSONObject) parse.parse(inLine);
-					
-					//JSONObject obj = (JSONObject) dataObj;
-					//System.out.println(obj.get("msg"));
-					
-					JSONArray countryArr = (JSONArray) dataObj.get("data");
-					for(int i = 0; i < countryArr.size(); i++) {
-						JSONObject newObject = (JSONObject) countryArr.get(i);
-						//System.out.println(newObject.get("country"));
-						String countryName = (String) newObject.get("country");
-						//System.out.println(countryName);
-						Country country = new Country();
-						country.setName(countryName);
-						System.out.println(country.toString());
-						Country savedCountry = countryRepository.save(country);
-	 				}
-					
-				}
-				
-			} catch (IOException | ParseException e) {
-				// TODO Auto-generated catch block
-				System.out.println("in catch");
-				e.printStackTrace();
-			}
-		 return new ResponseEntity<>(countryRepository.findAll(), HttpStatus.OK);
-	 }
+//	 @GetMapping("/createDb")
+//	 public ResponseEntity<Object> createDb() {
+//			try {
+//				
+//				URL url = new URL("https://countriesnow.space/api/v0.1/countries");
+//				
+//				HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//				conn.setRequestMethod("GET");
+//				conn.connect();
+//				
+//				//Get response code
+//				int responseCode = conn.getResponseCode();
+//				
+//				if(responseCode != 200) {
+//					throw new RuntimeException("HttpResponseCode:" + responseCode);
+//				} else {
+//					String inLine = "";
+//					Scanner scanner = new Scanner(url.openStream());
+//					
+//					//write all json data into a string 
+//					while(scanner.hasNext()) {
+//						inLine += scanner.nextLine();
+//					}
+//					
+//					scanner.close();
+//					
+//					JSONParser parse = new JSONParser();
+//					JSONObject dataObj = (JSONObject) parse.parse(inLine);
+//					
+//					//JSONObject obj = (JSONObject) dataObj;
+//					//System.out.println(obj.get("msg"));
+//					
+//					JSONArray countryArr = (JSONArray) dataObj.get("data");
+//					for(int i = 0; i < countryArr.size(); i++) {
+//						JSONObject newObject = (JSONObject) countryArr.get(i);
+//	
+//						String countryName = (String) newObject.get("country");
+//
+//						Country country = new Country();
+//						country.setName(countryName);
+//						//keeping this so you know when it's done, takes a while, last country is zimbabwe
+//						System.out.println(country.toString());
+//						Country savedCountry = countryRepository.save(country);
+//						
+//						JSONArray citiesArr = (JSONArray) newObject.get("cities");
+//						for(int j = 0; j < citiesArr.size(); j++) {
+//							String cityName = (String) citiesArr.get(j);
+//							City city = new City();
+//							city.setName(cityName);
+//							city.setCountry(savedCountry);
+//							cityRepository.save(city);
+//						}
+//	 				}
+//					
+//				}
+//				
+//			} catch (IOException | ParseException e) {
+//				// TODO Auto-generated catch block
+//
+//				e.printStackTrace();
+//			}
+//		 return new ResponseEntity<>(countryRepository.findAll(), HttpStatus.OK);
+//	 }
 }

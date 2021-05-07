@@ -10,7 +10,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="articles")
+@Table(name="article")
 @SequenceGenerator(name= "article_sequence", initialValue = 1, allocationSize = 1)
 public class Article {
 	@Id

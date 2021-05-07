@@ -15,7 +15,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="cities")
+@Table(name="city")
 @SequenceGenerator(name= "city_sequence", initialValue = 1, allocationSize = 1)
 public class City {
 	

@@ -18,10 +18,11 @@ import javax.persistence.Table;
 @Table(name="cities")
 @SequenceGenerator(name= "city_sequence", initialValue = 1, allocationSize = 1)
 public class City {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = " city_sequence")
-
 	private int id;
+	
 	private String name;
 	
 	@ManyToOne

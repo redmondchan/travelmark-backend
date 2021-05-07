@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -16,6 +18,10 @@ public class Article {
 	private int id;
 	private String title;
 	private String link;
+	
+	@ManyToOne
+	@JoinColumn(name = "fk_city_id", referencedColumnName = "id")
+	private City city;
 	
 	public int getId() {
 		return id;

@@ -14,6 +14,7 @@ import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,7 +32,8 @@ import com.redmondchan.travelmark.repository.CountryRepository;
 public class CountryController {
 	 @Autowired
 	 private CountryRepository countryRepository;
-	 @Autowired CityRepository cityRepository;
+	 @Autowired 
+	 CityRepository cityRepository;
 	 
 	 @GetMapping("/country/{id}")
 	 public ResponseEntity<Object> getCountry(@PathVariable("id") int id) {
@@ -47,7 +49,7 @@ public class CountryController {
 		 System.out.println(country.toString());
 		 return ResponseEntity.created(new URI("/country" + result.getId())).body(result);
 	 }
-	 
+	 @CrossOrigin
 	 @GetMapping("/countries")
 	 public ResponseEntity<Object> getCountries() {
 		 return new ResponseEntity<>(countryRepository.findAll(), HttpStatus.OK);

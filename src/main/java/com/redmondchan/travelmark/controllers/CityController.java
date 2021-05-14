@@ -42,4 +42,10 @@ public class CityController {
 		 cityRepository.deleteAll();
 		 return new ResponseEntity<>(cityRepository.findAll(), HttpStatus.OK);
 	 }
+	 
+	 @GetMapping("/findCitiesByCountryId/{id}")
+	 public ResponseEntity<Object> findCitiesByCountryId(@PathVariable("id") int id) {
+		 cityRepository.findCitiesByCountryId(id);
+		 return new ResponseEntity<>(cityRepository.findCitiesByCountryId(id), HttpStatus.OK);
+	 }
 }

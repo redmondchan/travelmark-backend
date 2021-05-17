@@ -21,6 +21,8 @@ import com.redmondchan.travelmark.repository.CityRepository;
 public class ArticleController {
 	@Autowired
 	private ArticleRepository articleRepository;
+	@Autowired
+	private CityRepository cityRepository;
 	
 	 @GetMapping("/article/{id}")
 	 public ResponseEntity<Object> getArticles(@PathVariable("id") int id) {
@@ -32,7 +34,7 @@ public class ArticleController {
 	 ResponseEntity<Article> createArticles(@RequestBody Article article) throws URISyntaxException {
 		 Article result = articleRepository.save(article);
 		 System.out.println("test");
-		 return ResponseEntity.created(new URI("/city" + result.getId())).body(result);
+		 return ResponseEntity.created(new URI("/article/" + result.getId())).body(articleRepository.getOne(result.getId()));
 	 }
 	 
 	 @GetMapping("/articles")

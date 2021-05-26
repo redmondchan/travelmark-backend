@@ -55,4 +55,10 @@ public class ArticleController {
 		 
 		 return new ResponseEntity<>(articleRepository.findArticlesByCountry(id), HttpStatus.OK);
 	 }
+	 
+	 @GetMapping("/articlesByCity/{id}")
+	 public ResponseEntity<Object> getArticlesByCity(@PathVariable("id") int id) {
+		 
+		 return new ResponseEntity<>(articleRepository.findArticlesByCity(id), HttpStatus.OK);
+	 }
 }

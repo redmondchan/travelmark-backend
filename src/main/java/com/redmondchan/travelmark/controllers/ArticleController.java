@@ -50,12 +50,14 @@ public class ArticleController {
 		 return new ResponseEntity<>(articleRepository.findAll(), HttpStatus.OK);
 	 }
 	 
+	 @CrossOrigin
 	 @GetMapping("/articlesByCountry/{id}")
 	 public ResponseEntity<Object> getArticlesByCountry(@PathVariable("id") int id) {
 		 
 		 return new ResponseEntity<>(articleRepository.findArticlesByCountry(id), HttpStatus.OK);
 	 }
 	 
+	 @CrossOrigin
 	 @GetMapping("/articlesByCity/{id}")
 	 public ResponseEntity<Object> getArticlesByCity(@PathVariable("id") int id) {
 		 

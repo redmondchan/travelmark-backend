@@ -13,4 +13,7 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
 	@Query("SELECT article FROM Article article WHERE article.city.country.id = ?1")
 	public List<Article> findArticlesByCountry(int countryId);
 	
+	@Query("SELECT article FROM Article article WHERE article.city.id = ?1")
+	public List<Article> findArticlesByCity(int cityId);
+	
 }

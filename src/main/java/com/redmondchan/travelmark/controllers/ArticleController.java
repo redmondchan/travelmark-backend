@@ -49,4 +49,10 @@ public class ArticleController {
 		 articleRepository.deleteAll();
 		 return new ResponseEntity<>(articleRepository.findAll(), HttpStatus.OK);
 	 }
+	 
+	 @GetMapping("/articlesByCountry/{id}")
+	 public ResponseEntity<Object> getArticlesByCountry(@PathVariable("id") int id) {
+		 
+		 return new ResponseEntity<>(articleRepository.findArticlesByCountry(id), HttpStatus.OK);
+	 }
 }
